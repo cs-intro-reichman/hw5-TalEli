@@ -121,7 +121,7 @@ public class Scrabble {
 				System.out.println(input + " earned " + thisScore + " points. Score: " + score + " points");
 			}
 			else {
-				System.out.println("Invalid word. Try again");
+				System.out.println("Invalid word. Try again.");
 			}
 			
 		}
