@@ -70,6 +70,9 @@ public class MyString {
      */
     public static String spacedString(String str) {
         String newStr = "";
+        if (str.length() == 1){
+            return str;
+        }
         for (int i =0; i < str.length()-1; i++){
             newStr += str.charAt(i) + " ";
         }
