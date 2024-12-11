@@ -77,7 +77,7 @@ public class Scrabble {
 		if (MyString.subsetOf("runi", word)){
 			score += 1000;
 		}
-		return score;
+		return score*word.length();
 	}
 
 	// Creates a random hand of length (HAND_SIZE - 2) and then inserts
