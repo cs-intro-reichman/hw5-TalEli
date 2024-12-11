@@ -53,7 +53,7 @@ public class Scrabble {
 
 	// Checks if the given word is in the dictionary.
 	public static boolean isWordInDictionary(String word) {
-		word = word.toUpperCase();
+		word = word.toLowerCase();
 		for (int i=0;i<DICTIONARY.length;i++)
 		{
 			if (DICTIONARY[i] != null && DICTIONARY[i].equals(word)){
@@ -72,12 +72,12 @@ public class Scrabble {
 			score += 50; 
 		}
 		for (int i =0; i < word.length(); i++){
-			score += SCRABBLE_LETTER_VALUES[word.charAt(i)];
+			score += SCRABBLE_LETTER_VALUES[word.charAt(i)-97];
 		}
 		if (MyString.subsetOf("runi", word)){
 			score += 1000;
 		}
-		return 0;
+		return score;
 	}
 
 	// Creates a random hand of length (HAND_SIZE - 2) and then inserts
@@ -107,8 +107,18 @@ public class Scrabble {
 			// non-whitespace characters. Whitespace is either space characters, or  
 			// end-of-line characters.
 			String input = in.readString();
-			score = wordScore(input);
-			MyString.remove(hand, input);
+			if (input.equals(".")){
+				break;
+			}
+			if (isWordInDictionary(input)){
+				score += wordScore(input);
+				hand = MyString.remove(hand, input);
+				System.out.println(input + " earned " + wordScore(input) + " points. Score: " + score + " points");
+			}
+			else {
+				System.out.println("No such word in the dictionary. Try again.");
+			}
+			
 		}
 		if (hand.length() == 0) {
 	        System.out.println("Ran out of letters. Total score: " + score + " points");
@@ -131,10 +141,10 @@ public class Scrabble {
 			// Gets the user's input, which is all the characters entered by 
 			// the user until the user enter the ENTER character.
 			String input = in.readString();
-			if (input == "e"){
+			if (input.equals("e")){
 				break;
 			}
-			if (input == "n"){
+			if (input.equals("n")){
 				playHand(createHand());
 			}
 			
@@ -144,10 +154,10 @@ public class Scrabble {
 	public static void main(String[] args) {
 		//// Uncomment the test you want to run
 		//testBuildingTheDictionary();  
-		testScrabbleScore();    
+		//testScrabbleScore();    
 		////testCreateHands();  
 		////testPlayHands();
-		////playGame();
+		playGame();
 	}
 
 	public static void testBuildingTheDictionary() {
