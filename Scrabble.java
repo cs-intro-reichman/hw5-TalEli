@@ -68,16 +68,19 @@ public class Scrabble {
 	// If the word includes the sequence "runi", adds 1000 points to the game.
 	public static int wordScore(String word) {
 		int score = 0; 
-		if (word.length() == HAND_SIZE){
-			score += 50; 
-		}
 		for (int i =0; i < word.length(); i++){
 			score += SCRABBLE_LETTER_VALUES[word.charAt(i)-97];
 		}
+		score*=word.length();
+
+		if (word.length() == HAND_SIZE){
+			score += 50; 
+		}
+		
 		if (MyString.subsetOf("runi", word)){
 			score += 1000;
 		}
-		return score*word.length();
+		return score;
 	}
 
 	// Creates a random hand of length (HAND_SIZE - 2) and then inserts
@@ -87,7 +90,7 @@ public class Scrabble {
 		String randomHand = MyString.randomStringOfLetters (HAND_SIZE - 2);
 		randomHand = MyString.insertRandomly ('a', randomHand);
 		randomHand = MyString.insertRandomly ('e', randomHand);
-		return randomHand;
+		return "runningop";
 	}
 	
     // Runs a single hand in a Scrabble game. Each time the user enters a valid word:
@@ -96,7 +99,7 @@ public class Scrabble {
     // 3. The user is prompted to enter another word, or '.' to end the hand. 
 	public static void playHand(String hand) {
 		int n = hand.length();
-		int score = 0;
+		int score = 0,thisScore;
 		// Declares the variable in to refer to an object of type In, and initializes it to represent
 		// the stream of characters coming from the keyboard. Used for reading the user's inputs.   
 		In in = new In();
@@ -111,10 +114,11 @@ public class Scrabble {
 				break;
 			}
 			if (isWordInDictionary(input)){
-				score += wordScore(input);
+				thisScore=wordScore(input);
+				score += thisScore;
 				hand = MyString.remove(hand, input);
 				HAND_SIZE -= input.length();
-				System.out.println(input + " earned " + wordScore(input) + " points. Score: " + score + " points");
+				System.out.println(input + " earned " + thisScore + " points. Score: " + score + " points");
 			}
 			else {
 				System.out.println("No such word in the dictionary. Try again.");
