@@ -90,7 +90,7 @@ public class Scrabble {
 		String randomHand = MyString.randomStringOfLetters (HAND_SIZE - 2);
 		randomHand = MyString.insertRandomly ('a', randomHand);
 		randomHand = MyString.insertRandomly ('e', randomHand);
-		return "runningop";
+		return randomHand;
 	}
 	
     // Runs a single hand in a Scrabble game. Each time the user enters a valid word:

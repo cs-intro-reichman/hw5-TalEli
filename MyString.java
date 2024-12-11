@@ -53,7 +53,7 @@ public class MyString {
 
          for (int i=0; i< str1.length(); i++){
             int letterCount = countChar(str1, str1.charAt(i));
-            if (letterCount != countChar(str2, str1.charAt(i))){
+            if (letterCount > countChar(str2, str1.charAt(i))){
                 return false;
             }
          }
