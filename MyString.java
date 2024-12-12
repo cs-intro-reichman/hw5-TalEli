@@ -20,8 +20,16 @@ public class MyString {
      * @return the number of times c appears in str
      */
     public static int countChar(String str, char ch) {
-        //// Replace the following statement with your code
-        return 0;
+        int amount = 0;
+        if (str == "") {
+            return amount;
+        }
+        for (int i=0; i< str.length(); i++){
+        if (str.charAt(i) == ch){
+            amount ++;
+        }
+        }
+        return amount;
     }
 
     /** Returns true if str1 is a subset string str2, false otherwise
@@ -36,8 +44,20 @@ public class MyString {
      * @return true is str1 is a subset of str2, false otherwise
      */
     public static boolean subsetOf(String str1, String str2) {
-         //// Replace the following statement with your code
-        return false;
+         if (str2.length() <= str1.length()){
+            return false;
+         }
+         if (contains(str1, str2)){
+            return true;
+         }
+
+         for (int i=0; i< str1.length(); i++){
+            int letterCount = countChar(str1, str1.charAt(i));
+            if (letterCount > countChar(str2, str1.charAt(i))){
+                return false;
+            }
+         }
+        return true;
     }
 
     /** Returns a string which is the same as the given string, with a space
@@ -49,8 +69,17 @@ public class MyString {
      * @return a string consisting of the characters of str, separated by spaces.
      */
     public static String spacedString(String str) {
-        //// Replace the following statement with your code
-        return null;
+        String newStr = "";
+        if (str.length() == 1){
+            return str;
+        }
+        for (int i =0; i < str.length()-1; i++){
+            newStr += str.charAt(i) + " ";
+        }
+        if (str.length() > 1){
+            newStr += str.charAt(str.length() - 1);
+        }
+        return newStr;
     }
   
     /**
@@ -64,8 +93,16 @@ public class MyString {
      * @return a randomly generated string, consisting of 'n' lowercase letters
      */
     public static String randomStringOfLetters(int n) {
-        //// Replace the following statement with your code
-        return null;
+        String randomStr = "";
+        if (n == 0){
+            return randomStr;
+        }
+
+        for (int i=0; i<n; i++){
+            char randomChar = (char) ((int) (Math.random() *26) + 'a');
+            randomStr += randomChar;
+        }
+        return randomStr;
     }
 
     /**
@@ -78,8 +115,22 @@ public class MyString {
      * @return a string consisting of str1 minus all the characters of str2
      */
     public static String remove(String str1, String str2) {
-       //// Replace the following statement with your code
-        return null;
+       String str1Removed = "";
+
+       
+       for (int i=0; i<str1.length(); i++){
+        if (countChar(str2, str1.charAt(i)) == 0){
+            str1Removed += str1.charAt(i);
+        }
+        else {
+            for (int j=0; j<str2.length(); j++)
+            if (str2.charAt(j) == str1.charAt(i)){
+                str2 = str2.substring(0, j) + str2.substring(j+1);
+            }
+        }
+        }
+      
+        return str1Removed;
     }
 
     /**
@@ -97,4 +148,41 @@ public class MyString {
          String result = str.substring(0, randomIndex) + ch + str.substring(randomIndex);
          return result;
     }    
+
+    public static String lowerCase(String str) {
+        String lowerStr = "";
+        for (int i = 0; i < str.length(); i++){
+            if (str.charAt(i) >= 'A' && str.charAt(i) <= 'Z'){
+                lowerStr += (char)(str.charAt(i)+ 32);
+            }
+            else {
+            lowerStr += str.charAt(i);
+            }
+        }
+        return lowerStr;
+    }
+
+    /** If str1 contains str2, returns true; otherwise returns false. */
+    public static boolean contains(String str1, String str2) {
+        if (str2 == ""){
+            return true;
+        }
+        if (str1 == ""){
+            return false;
+        }
+        
+        for(int i =0; i<= str1.length() - str2.length(); i++){
+            int j=0;
+            while (j< str2.length() && str1.charAt(i+j) == str2.charAt(j)){
+                j++;
+            }
+
+            if (j == str2.length()){
+                return true;
+            }
+           
+        }
+        
+        return false;
+    }
 }
