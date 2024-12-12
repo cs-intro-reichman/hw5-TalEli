@@ -119,7 +119,9 @@ public class Scrabble {
 				hand = MyString.remove(hand, input);
 				HAND_SIZE -= input.length();
 				System.out.println(input + " earned " + thisScore + " points. Score: " + score + " points");
+				System.out.println();
 			}
+			//TODO- test fails here
 			else {
 				System.out.println("No such word in the dictionary. Try again.");
 			}
