@@ -113,6 +113,9 @@ public class Scrabble {
 			if (input.equals(".")){
 				break;
 			}
+			if (!MyString.subsetOf(input, hand)) {
+				System.out.println("Invalid word. Try again.");}
+				
 			if (isWordInDictionary(input)){
 				thisScore=wordScore(input);
 				score += thisScore;
